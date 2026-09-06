@@ -1,0 +1,24 @@
+# WordPress core (if a Studio site root ever lives in this repo, only wp-content is ours)
+wp-admin/
+wp-includes/
+wp-*.php
+index.php
+license.txt
+readme.html
+xmlrpc.php
+
+# Studio local database and runtime state
+*.sqlite
+*.sqlite-journal
+wp-content/database/
+wp-content/mu-plugins/sqlite*
+
+# Secrets - never commit credentials
+.env
+*.local
+wp-config.php
+
+# OS / editor noise
+Thumbs.db
+.DS_Store
+node_modules/
