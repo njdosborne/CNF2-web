@@ -4,14 +4,31 @@ Working repo for **curenf2.org** (Cure NF2 charity site, WordPress.com-hosted), 
 AcmeCloud spoke. No Azure/Terraform footprint: the site is SaaS-hosted, so the
 integration surface is MCP + WordPress Studio, and this repo is the review gate.
 
-## The two MCPs - keep them straight
+## Sites and IDs (WordPress.com, via `wpcom-mcp`)
 
-- **`wordpress-studio`** (local): the sandbox. Day-to-day dev happens here -
-  file edits, WP-CLI, screenshots. Zero risk to the live site.
-- **`wpcom-mcp`** (live): production curenf2.org. Read freely. Writes are
-  **draft-only**: never set `status: publish` and never touch the site facade
-  (settings, themes, plugins) without Neil's explicit go-ahead in the moment.
-  A standing instruction to "work on the site" is not publish approval.
+| Environment | Site ID | URL | Rule |
+|---|---|---|---|
+| Production | 147892643 | https://curenf2.org | Read freely. Writes draft-only, never `status: publish`, never the site facade (settings/themes/plugins) without Neil's go-ahead in the moment. |
+| Staging (UAT) | 253312726 | https://staging-e99b-nf2biosolutions.wpcomstaging.com | The assistant's write target. Still requires the MCP `user_confirmed` flow. |
+
+- A standing instruction to "work on the site" is not publish approval.
+- Business plan, owned by Nicole Henwood's account (`nf2bio`); Neil's account
+  `njdof57b43397e9` is an administrator on both sites (added to staging
+  2026-09-09). Site-level MCP toggle lives in Hosting Dashboard > Settings > AI tools.
+- Staging is a SNAPSHOT, not a mirror. Before starting work: Hosting Dashboard >
+  staging > Sync > Pull from Production (files + database). Promotion is
+  Push to Production: files selectively; database push replaces the whole live
+  DB, so only push DB when staging was the sole place edited since the pull.
+- Pre-rebrand site archive (the staging content as of 2026-03-11, old "NF2
+  BioSolutions" branding): `c:\project\CNF2-old-site-mirror` (wget mirror +
+  `_content-export/*.json` from the REST API + index.html). Not in git. A
+  6 GB Jetpack backup of the same staging site also exists in WordPress.com.
+
+## Optional local sandbox (`wordpress-studio`)
+
+WordPress Studio on the laptop, for deeper theme work. Not installed yet.
+Its MCP (`studio mcp`) drives the local copy; Studio Sync pulls/pushes to
+WordPress.com. Same review rules apply.
 
 ## Review-before-publish - NON-NEGOTIABLE
 
